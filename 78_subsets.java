@@ -66,20 +66,20 @@ class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         result = new ArrayList<>();
         List<Integer> rsf = new ArrayList<>();
-        for (int i = 0; i <= nums.length; i++) {
-        	backtrack(nums, 0, i, rsf);
+        for (int len = 0; i <= nums.length; i++) {
+        	backtrack(nums, 0, len, rsf);
         }
         return result;
     }
     
-    private void backtrack(int[] nums, int start, int k, List<Integer> rsf) {
-        if (rsf.size() == k) {
+    private void backtrack(int[] nums, int start, int len, List<Integer> rsf) {
+        if (rsf.size() == len) {
             result.add(new ArrayList(rsf));
             return;
         }
         for (int i = start; i < nums.length; i++) {
             rsf.add(nums[i]);
-            backtrack(nums, i + 1, k, rsf);
+            backtrack(nums, i + 1, len, rsf);
             rsf.remove(rsf.size() - 1);
         }
     }
