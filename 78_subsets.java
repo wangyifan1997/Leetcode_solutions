@@ -39,3 +39,48 @@ class Solution {
         helper(nums, pos + 1, rsf);
     }	
 }
+
+class Solution {
+	List<List<Integer>> result;
+    
+    public List<List<Integer>> subsets(int[] nums) {
+        result = new LinkedList<>();
+        List<Integer> rsf = new ArrayList<>();
+        helper(nums, 0, rsf);
+        return result;
+    }
+
+    private void helper(int[] nums, int start, List<Integer> rsf) {
+    	result.add(new ArrayList<>(rsf));
+    	for (int i = start; i < nums.length; i++) {
+    		rsf.add(nums[i]);
+    		helper(nums, i + 1, rsf);
+    		rsf.remove(rsf.size() - 1);
+    	}
+    }	
+}
+
+class Solution {
+    List<List<Integer>> result;
+    
+    public List<List<Integer>> subsets(int[] nums) {
+        result = new ArrayList<>();
+        List<Integer> rsf = new ArrayList<>();
+        for (int i = 0; i <= nums.length; i++) {
+        	backtrack(nums, 0, i, rsf);
+        }
+        return result;
+    }
+    
+    private void backtrack(int[] nums, int start, int k, List<Integer> rsf) {
+        if (rsf.size() == k) {
+            result.add(new ArrayList(rsf));
+            return;
+        }
+        for (int i = start; i < nums.length; i++) {
+            rsf.add(nums[i]);
+            backtrack(nums, i + 1, k, rsf);
+            rsf.remove(rsf.size() - 1);
+        }
+    }
+}
