@@ -42,16 +42,51 @@
  * }
  */
 class Solution {
-    public boolean isSameTree(TreeNode p, TreeNode q) {
-        if ((p != null && q == null) 
-            || (p == null && q != null)) {
-            return false; 
-        } else if (p == null && q == null) {
+    public boolean isSameTreeRecursive(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
             return true;
-        } else if (p.val != q.val) {
+        }
+        if (p == null || q == null) {
             return false;
-        } else {
+        }
+        if (p.val == q.val) {
             return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
         }
+        return false;
+    }
+
+    public boolean isSameTreeIterative(TreeNode p, TreeNode q) {
+        Stack<TreeNode> stackP = new Stack<>();
+        Stack<TreeNode> stackQ = new Stack<>();
+
+        stackP.push(p);
+        stackQ.push(q);
+
+        while (!stackP.empty()) {
+            if (stackQ.empty()) {
+                return false;
+            }
+
+            TreeNode nodeP = stackP.pop();
+            TreeNode nodeQ = stackQ.pop();
+
+            if (nodeP != null && nodeQ != null) {
+                if (nodeP.val != nodeQ.val) {
+                    return false;
+                }
+                stackP.push(nodeP.left);
+                stackP.push(nodeP.right);
+                stackQ.push(nodeQ.left);
+                stackQ.push(nodeQ.right);
+            } else if (nodeP != null || nodeQ != null) {
+                return false;
+            }
+        }
+
+        if (!stackQ.empty()) {
+            return false;
+        }
+
+        return true;
     }
 }
