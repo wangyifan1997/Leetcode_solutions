@@ -60,10 +60,10 @@ class Solution {
         if (row < 0 || col < 0 || row >= visited.length || col >= visited[0].length || grid[row][col] == 0 || visited[row][col] == 1) return 0;
 
         visited[row][col] = 1;
-        int result = grid[row][col] + Collections.max(Arrays.asList(dfs(row - 1, col, grid, visited),
-                                                                        dfs(row + 1, col, grid, visited),
-                                                                        dfs(row, col - 1, grid, visited),
-                                                                        dfs(row, col + 1, grid, visited)));
+        int result = grid[row][col] + Math.max(dfs(row - 1, col, grid, visited),
+                                        Math.max(dfs(row + 1, col, grid, visited),
+                                            Math.max(dfs(row, col - 1, grid, visited),
+                                                        dfs(row, col + 1, grid, visited))));
         visited[row][col] = 0; // backtracking
         return result;
     }
