@@ -49,21 +49,21 @@ class Solution {
 
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
-                max = Math.max(dfs(row, col, grid, visited), max);
+                max = Math.max(backtrack(row, col, grid, visited), max);
             }
         }
 
         return max;
     }
 
-    private int dfs(int row, int col, int[][] grid, int[][] visited) {
+    private int backtrack(int row, int col, int[][] grid, int[][] visited) {
         if (row < 0 || col < 0 || row >= visited.length || col >= visited[0].length || grid[row][col] == 0 || visited[row][col] == 1) return 0;
 
         visited[row][col] = 1;
-        int result = grid[row][col] + Math.max(dfs(row - 1, col, grid, visited),
-                                        Math.max(dfs(row + 1, col, grid, visited),
-                                            Math.max(dfs(row, col - 1, grid, visited),
-                                                        dfs(row, col + 1, grid, visited))));
+        int result = grid[row][col] + Math.max(backtrack(row - 1, col, grid, visited),
+                                        Math.max(backtrack(row + 1, col, grid, visited),
+                                            Math.max(backtrack(row, col - 1, grid, visited),
+                                                backtrack(row, col + 1, grid, visited))));
         visited[row][col] = 0; // backtracking
         return result;
     }
