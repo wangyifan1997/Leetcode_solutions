@@ -34,3 +34,15 @@ class Solution:
             prev = curr
             
         return head
+
+    def addTwoNumbersRecursive(self, l1: ListNode, l2: ListNode) -> ListNode:
+        return self.helper(l1, l2, 0)
+
+    def helper(self, l1: ListNode, l2: ListNode, carry: int) -> ListNode:
+        if l1 == None and l2 == None and carry == 0:
+            return None
+        sum = (0 if not l1 else l1.val) + (0 if not l2 else l2.val) + carry
+        carry = 1 if sum >= 10 else 0
+        head = ListNode(sum % 10)
+        head.next = self.helper(l1.next if l1 else l1, l2.next if l2 else l2, carry)
+        return head
