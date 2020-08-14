@@ -31,11 +31,11 @@ class Solution:
         for interval in intervals:
             start = interval[0]
             end = interval[1]
-            lastStart = result[len(result) - 1][0]
-            lastEnd = result[len(result) - 1][1]
+            lastStart = result[-1][0]
+            lastEnd = result[-1][1]
             if start > lastEnd:
                 result.append(interval[:])
             if end > lastEnd:
-                result[len(result) - 1][1] = end
+                result[-1][1] = end
         
         return result
